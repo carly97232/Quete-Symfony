@@ -2,8 +2,3 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 # config/routes.yaml
-<<<<<<< HEAD
-
-
-=======
->>>>>>> c4d344a8633ec05a65b17c0c98c108f0d1136715
