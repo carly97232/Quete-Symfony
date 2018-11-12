@@ -8,7 +8,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Form\ArticleSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BlogController extends AbstractController
@@ -31,5 +35,36 @@ class BlogController extends AbstractController
     {
         $slug = ucwords(str_replace("-", " ", $slug));
         return $this->render('blog/article.html.twig', ['slug' => $slug]);
+    }
+
+    /**
+     * Show all row from article's entity
+     *
+     * @Route("/", name="blog_index")
+     * @return Response A response instance
+     */
+    public function index() : Response
+    {
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
+
+        if (!$articles) {
+            throw $this->createNotFoundException(
+                'No article found in article\'s table.'
+            );
+        }
+        $form = $this->createForm(
+            ArticleSearchType::class,
+            null,
+            ['method' => Request::METHOD_GET]
+        );
+
+        return $this->render(
+            'blog/index.html.twig', [
+                'articles' => $articles,
+                'form' => $form->createView(),
+            ]
+        );
     }
 }
