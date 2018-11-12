@@ -5,14 +5,13 @@
  * Date: 04/11/18
  * Time: 20:51
  */
-
 namespace App\Controller;
-
 use App\Entity\Article;
+use App\Form\ArticleSearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 class BlogController extends AbstractController
 {
     /**
@@ -24,18 +23,16 @@ class BlogController extends AbstractController
     {
         return $this->render('blog/index.html.twig', ['page' => $page]);
     }
-
     /**
      * @Route("/blog/{slug}", requirements={"slug"="[a-z{0-9}-]+"}, name="blog_show")
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show($slug = 'Article Sans Titre')
+    public function show($slug='Article Sans Titre')
     {
         $slug = ucwords(str_replace("-", " ", $slug));
         return $this->render('blog/article.html.twig', ['slug' => $slug]);
     }
-
     /**
      * Show all row from article's entity
      *
@@ -53,9 +50,16 @@ class BlogController extends AbstractController
                 'No article found in article\'s table.'
             );
         }
+        $form = $this->createForm(
+            ArticleSearchType::class,
+            null,
+            ['method' => Request::METHOD_GET]
+        );
         return $this->render(
-            'blog/index.html.twig',
-            ['articles' => $articles]
+            'blog/index.html.twig', [
+                'articles' => $articles,
+                'form' => $form->createView(),
+            ]
         );
     }
 }
