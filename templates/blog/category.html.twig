@@ -2,10 +2,16 @@
 
 
 {% block body %}
-    {% for article in articles %}
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+    {% for category in categories %}
         <div>
-            <h2>{{ loop.index }} / {{ article.title }} - Category : {{ article.category.name }}</h2>
-            <p>{{ article.content }}</p>
+            <h2>{{ category.name }}</h2>
         </div>
     {% endfor %}
+
 {% endblock %}

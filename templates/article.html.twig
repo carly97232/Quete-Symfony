@@ -3,5 +3,7 @@
 
 
 {% block body %}
-    <a href="{{ path('article_show', {'id': article.id }) }}">{{article.title}}</a>
+    <h1>{{ article.title}}</h1>
+    <p>{{ article.content }}</p>
+
 {% endblock %}
