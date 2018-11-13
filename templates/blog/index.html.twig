@@ -7,11 +7,6 @@
 {% block body %}
     <h1>All articles from article's table : </h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.name, 'Your name') }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
-
     {% for article in articles %}
         <div>
             <h2>{{ loop.index }} / {{ article.title }} - Category : {{ article.category.name }}</h2>
