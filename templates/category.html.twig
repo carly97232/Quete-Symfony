@@ -3,5 +3,7 @@
 
 
 {% block body %}
-    <a href="{{ path('category_show', {'id': category.id }) }}">{{category.name}}</a>
+    {% for category in categories %}
+        <h1>{{category.name}}</h1>
+    {% endfor %}
 {% endblock %}

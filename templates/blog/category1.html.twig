@@ -4,12 +4,10 @@
 
 {% block body %}
     {% for category in categories %}
-        <h1><a href="{{ path('article_show', {'id': category.id }) }}">{{ category.name }}</a></h1>
-        {% for article in category.articles %}
+        <h1><a href="{{ path('blog_index', {'id': category.id }) }}">{{ category.name }}</a></h1>
             <li>
                 <h2>{{ article.title }}</h2>
                 <p>{{ article.content }}</p>
             </li>
-        {% endfor %}
     {% endfor %}
 {% endblock %}

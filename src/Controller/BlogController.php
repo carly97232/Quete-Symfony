@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,25 +38,15 @@ class BlogController extends AbstractController
     }
 
     /**
-     * Show all row from article's entity
-     *
-     * @Route("/", name="blog_index")
-     * @return Response A response instance
+     * @Route("/artcat", name="blog_index")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index() : Response
+    public function index()
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
-
-        if (!$articles) {
-            throw $this->createNotFoundException(
-                'No article found in article\'s table.'
-            );
-        }
-        return $this->render(
-            'blog/index.html.twig',
-            ['articles' => $articles]
-        );
+        $category = new Category();
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        $articles = $category->getArticles();
+        return $this->render('blog/index.html.twig', ['categories' => $categories, 'articles' => $articles]);
     }
 }

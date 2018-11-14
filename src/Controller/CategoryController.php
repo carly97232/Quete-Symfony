@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +24,6 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category) :Response
     {
-        return $this->render('category.html.twig', ['category'=>$category]);
+        return $this->render('blog/category.html.twig', ['category'=>$category]);
     }
 }

@@ -8,7 +8,7 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Category;
 use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +23,9 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article) :Response
     {
-        return $this->render('article.html.twig', ['article'=>$article]);
+        $articles = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findAll();
+        return $this->render('article.html.twig', ['articles'=>$articles]);
     }
 }
