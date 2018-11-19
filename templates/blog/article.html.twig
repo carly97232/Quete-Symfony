@@ -6,14 +6,8 @@
     {% for article in articles %}
         <div>
             <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
         </div>
     {% endfor %}
-
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
-
-
 
 {% endblock %}

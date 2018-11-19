@@ -52,18 +52,10 @@ class ArticleController extends AbstractController
             $article,
             ['method' => Request::METHOD_POST]
         );
-        $article = new Article();
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
-            $em->flush();
-        }
+
         return $this->render(
             'blog/article.html.twig', [
                 'articles' => $article,
-                'form' => $form->createView(),
             ]
         );
     }

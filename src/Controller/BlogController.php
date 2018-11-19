@@ -6,58 +6,60 @@
  * Time: 20:51
  */
 namespace App\Controller;
+
+
 use App\Entity\Article;
-use App\Form\ArticleSearchType;
+use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 class BlogController extends AbstractController
 {
     /**
-     * @Route("/blog/{page}", requirements={"page"="\d+"}, name="blog_list")
-     * @param $page
+     * @Route("/category/{category}", name="blog_show_category")
+     * @param string $category
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function list($page)
+    public function showByCategory(string $category): Response
     {
-        return $this->render('blog/index.html.twig', ['page' => $page]);
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $category = $repository->findOneBy(['name'=>$category]);
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $articles = $repository->findBy(
+            ['category'=> $category],
+            ['id'=>'DESC'],
+            3
+        );
+        return $this->render(
+            'blog/category2.html.twig',
+            ['category' => $category, 'articles'=> $articles]
+        );
     }
-    /**
-     * @Route("/blog/{slug}", requirements={"slug"="[a-z{0-9}-]+"}, name="blog_show")
-     * @param $slug
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function show($slug='Article Sans Titre')
-    {
-        $slug = ucwords(str_replace("-", " ", $slug));
-        return $this->render('blog/article1.html.twig', ['slug' => $slug]);
-    }
+
     /**
      * Show all row from article's entity
      *
-     * @Route("/", name="blog_index")
+     * @Route("/articles", name="blog_index")
      * @return Response A response instance
      */
-    public function index() : Response
+    public function index(Request $request) : Response
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();
+
         if (!$articles) {
             throw $this->createNotFoundException(
                 'No article found in article\'s table.'
             );
         }
-        $form = $this->createForm(
-            ArticleSearchType::class,
-            null,
-            ['method' => Request::METHOD_GET]
-        );
+
         return $this->render(
             'blog/index.html.twig', [
                 'articles' => $articles,
-                'form' => $form->createView(),
             ]
         );
     }
