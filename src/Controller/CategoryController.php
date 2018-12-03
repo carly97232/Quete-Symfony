@@ -6,12 +6,14 @@
  * Time: 16:22
  */
 namespace App\Controller;
+
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+
 class CategoryController extends AbstractController
 {
     /**
@@ -25,7 +27,7 @@ class CategoryController extends AbstractController
     }
     /**
      * Show all row from category's entity
-     * @Route("/category", name="blog_category_index")
+     * @Route("/categories", name="blog_category_index")
      * @return Response A response instance
      */
     public function index(Request $request) : Response
@@ -51,6 +53,8 @@ class CategoryController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
             $em->flush();
+            return $this -> redirectToRoute ('blog_category_index');
+
         }
         return $this->render(
             'blog/category.html.twig', [

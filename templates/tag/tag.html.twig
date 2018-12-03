@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}tag_show{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Tag</h1>
+        <ul>
+            <h2><strong>{{ tag.name }}</strong></h2>
+            {% for article in tag.articles %}
+                <ul>
+                    <li>
+                      {{ article.title }}
+                    </li>
+                </ul>
+            {% endfor %}
+        </ul>
+        <a href="{{ path('tag_index') }}">
+            Back to Tags.
+        </a>
+    </div>
+{% endblock %}

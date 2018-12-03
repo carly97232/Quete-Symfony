@@ -10,7 +10,6 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
-use App\Entity\Category;
 use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,14 +25,13 @@ class ArticleController extends AbstractController
      */
     public function show(Article $article) :Response
     {
-
         return $this->render('article.html.twig', ['article'=>$article]);
     }
 
     /**
      * Show all row from article's entity
      *
-     * @Route("/article", name="blog_article_index")
+     * @Route("/articles", name="blog_article_index")
      * @param Request $request
      * @return Response A response instance
      */
@@ -49,17 +47,10 @@ class ArticleController extends AbstractController
         }
         $form = $this->createForm(
             ArticleType::class,
-            $article,
+            null,
             ['method' => Request::METHOD_POST]
         );
-        $article = new Article();
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-        if ($form->isSubmitted()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($article);
-            $em->flush();
-        }
+
         return $this->render(
             'blog/article.html.twig', [
                 'articles' => $article,

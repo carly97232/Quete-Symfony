@@ -6,12 +6,15 @@
  * Time: 20:51
  */
 namespace App\Controller;
+
 use App\Entity\Article;
 use App\Form\ArticleSearchType;
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 class BlogController extends AbstractController
 {
     /**
@@ -21,7 +24,7 @@ class BlogController extends AbstractController
      */
     public function list($page)
     {
-        return $this->render('blog/index.html.twig', ['page' => $page]);
+        return $this->render('blog/tag.html.twig', ['page' => $page]);
     }
     /**
      * @Route("/blog/{slug}", requirements={"slug"="[a-z{0-9}-]+"}, name="blog_show")
@@ -31,15 +34,17 @@ class BlogController extends AbstractController
     public function show($slug='Article Sans Titre')
     {
         $slug = ucwords(str_replace("-", " ", $slug));
-        return $this->render('blog/article1.html.twig', ['slug' => $slug]);
+        return $this->render('blog/article.html.twig', ['slug' => $slug]);
     }
+
     /**
      * Show all row from article's entity
      *
-     * @Route("/articles", name="blog_index")
+     * @Route("/allarticles", name="blog_index")
+     * @param Request $request
      * @return Response A response instance
      */
-    public function index() : Response
+    public function index(Request $request) : Response
     {
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
@@ -54,6 +59,16 @@ class BlogController extends AbstractController
             null,
             ['method' => Request::METHOD_GET]
         );
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
+            return $this -> redirectToRoute ('blog_index');
+
+        }
         return $this->render(
             'blog/index.html.twig', [
                 'articles' => $articles,

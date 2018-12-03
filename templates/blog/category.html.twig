@@ -1,17 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+
 
 {% block body %}
 
-    {% for category in categories %}
-        <div>
-            <h2>{{ category.name }}</h2>
-        </div>
-    {% endfor %}
+    <h1>Categories</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-    {{ form_end(form) }}
+    <div class="container">
+        <div class="row form col-8">
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <div class="text-center">
+                <button class="btn">{{ button_label|default('Save') }}</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        {% for category in categories %}
+            <a href="{{ path('category_show',{'id': category.id}) }}"><h2>{{ category.name }}</h2></a>
+        {% endfor %}
+    </div>
+    <a href="{{ path('blog_index') }}">
+        Back to Blog.
+    </a>
 
 {% endblock %}

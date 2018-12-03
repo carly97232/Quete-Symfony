@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block body %}
+
+    <h1>Tags</h1>
+    <div class="container example-wrapper">
+        <div class="row">
+            <ul>
+                {% for tag in tags %}
+                    <a href="{{ path('tag_show',{'name': tag.name}) }}"><h2>{{ tag.name }}</h2></a>
+                    <ul>
+                        {% for article in tag.articles %}
+                            <h3>{{ article.title }}</h3><br/>
+                            <p>{{ article.content }}</p>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

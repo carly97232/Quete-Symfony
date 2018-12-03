@@ -2,7 +2,15 @@
 
 
 {% block body %}
-    <h1>{{ article.title}}</h1>
-    <p>{{ article.content }}</p>
+
+    <div class="example-wrapper">
+        <h1>Article</h1>
+            <h2>{{ article.title }}</h2>
+
+            {{ article.content }}
+    </div>
+    <a href="{{ path('blog_article_index') }}">
+        Back to Article.
+    </a>
 
 {% endblock %}
