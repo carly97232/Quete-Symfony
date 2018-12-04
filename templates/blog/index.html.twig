@@ -10,25 +10,13 @@
     <h1>Blog</h1>
 
     <div class="container text-center">
-        <div class="form col-8">
-            {{ form_start(form) }}
-            {{ form_row(form.title) }}
-            {{ form_row(form.content) }}
-            {{ form_row(form.category) }}
-            <div class="text-center">
-                <button class="btn">{{ button_label|default('Save') }}</button>
-            </div>
-            {{ form_end(form) }}
-        </div>
         {% for article in articles %}
             <div>
                 <h2><a href="{{ path('article_show',{'id': article.id}) }}">{{ article.title }}</a>
                     : {{ article.category.name }}</h2>
                 <p>{{ article.content }}</p>
             </div>
-
         {% endfor %}
         <a class="btn btn-success" href="#" role="button">Back</a>
-
     </div>
 {% endblock %}

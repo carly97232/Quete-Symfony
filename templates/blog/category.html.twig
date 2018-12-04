@@ -7,11 +7,6 @@
     <h1>Categories</h1>
 
     <div class="container text-center">
-        {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        <div class="text-center">
-            <button class="btn">{{ button_label|default('Save') }}</button>
-        </div>
         {{ form_end(form) }}
         {% for category in categories %}
 
