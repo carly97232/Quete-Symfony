@@ -2,16 +2,18 @@
 
 
 {% block body %}
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content }}</p>
 
-    <div class="example-wrapper">
-        <h1>Article</h1>
-        <h2>{{ article.title }}</h2>
+    <h2>Tags associer:</h2>
 
-        {{ article.content }}
+    {% for tag in article.tags %}
+        <li>{{ tag.name }} </li>
+    {% else %}
+        <li>No tags for this article</li>
+    {% endfor %}
+    <div>
+        <a class="btn btn-success" href="{{ path('blog_article_index') }}" role="button">Articles</a>
     </div>
-
-    <a href="{{ path('blog_article_index') }}">
-        Back to Article.
-    </a>
 
 {% endblock %}

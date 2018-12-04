@@ -53,11 +53,11 @@ class CategoryController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
             $em->flush();
-            return $this -> redirectToRoute ('blog_category_index');
-
+            return $this -> redirectToRoute('blog_category_index');
         }
         return $this->render(
-            'blog/category.html.twig', [
+            'blog/category.html.twig',
+            [
                 'categories' => $category,
                 'form' => $form->createView(),
             ]

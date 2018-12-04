@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
-    <div>
-        <h1>{{ category.name }}</h1>
+    <h1>{{ category.name }}</h1>
+
+    <div class="container text-center">
         {% for article in category.articles %}
             <h2>{{ article.title }}</h2>
-            <p>{{ article.content }}</p>
         {% endfor %}
+        <div class="button text-center">
+            <a class="btn btn-success" href="{{ path('blog_index') }}" role="button">Back to Blog</a>
+            <a class="btn btn-success" href="{{ path('blog_category_index') }}" role="button">Back to Category</a>
+        </div>
     </div>
-    <a href="{{ path('blog_category_index') }}">
-        Back to Category.
-    </a><br/>
-    <a href="{{ path('blog_article_index') }}">
-        Back to Article.
-    </a>
 {% endblock %}

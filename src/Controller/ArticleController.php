@@ -8,7 +8,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Article;
 use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +25,7 @@ class ArticleController extends AbstractController
     public function show(Article $article) : Response
     {
         return $this->render('article.html.twig', [
-            'article' => $article,
+            'article' => $article
         ]);
     }
 
@@ -54,7 +53,8 @@ class ArticleController extends AbstractController
         );
 
         return $this->render(
-            'blog/article.html.twig', [
+            'blog/article.html.twig',
+            [
                 'articles' => $article,
                 'form' => $form->createView(),
             ]

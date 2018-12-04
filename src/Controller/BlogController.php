@@ -31,7 +31,7 @@ class BlogController extends AbstractController
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show($slug='Article Sans Titre')
+    public function show($slug = 'Article Sans Titre')
     {
         $slug = ucwords(str_replace("-", " ", $slug));
         return $this->render('blog/article.html.twig', ['slug' => $slug]);
@@ -49,6 +49,7 @@ class BlogController extends AbstractController
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();
+
         if (!$articles) {
             throw $this->createNotFoundException(
                 'No article found in article\'s table.'
@@ -66,11 +67,11 @@ class BlogController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
-            return $this -> redirectToRoute ('blog_index');
-
+            return $this -> redirectToRoute('blog_index');
         }
         return $this->render(
-            'blog/index.html.twig', [
+            'blog/index.html.twig',
+            [
                 'articles' => $articles,
                 'form' => $form->createView(),
             ]

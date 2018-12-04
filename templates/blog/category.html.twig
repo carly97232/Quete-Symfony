@@ -4,24 +4,19 @@
 
 
 {% block body %}
-
     <h1>Categories</h1>
 
-    <div class="container">
-        <div class="row form col-8">
-            {{ form_start(form) }}
-            {{ form_row(form.name) }}
-            <div class="text-center">
-                <button class="btn">{{ button_label|default('Save') }}</button>
-            </div>
-            {{ form_end(form) }}
+    <div class="container text-center">
+        {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        <div class="text-center">
+            <button class="btn">{{ button_label|default('Save') }}</button>
         </div>
+        {{ form_end(form) }}
         {% for category in categories %}
+
             <a href="{{ path('category_show',{'id': category.id}) }}"><h2>{{ category.name }}</h2></a>
         {% endfor %}
+        <a class="btn btn-success" href="{{ path('blog_index') }}" role="button">Back to Blog</a>
     </div>
-    <a href="{{ path('blog_index') }}">
-        Back to Blog.
-    </a>
-
 {% endblock %}

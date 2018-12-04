@@ -3,16 +3,15 @@
 {% block title %}tag_show{% endblock %}
 
 {% block body %}
-    <div class="example-wrapper">
-        <h1>Tag</h1>
+    <h1>Tag</h1>
+
+    <div class="container text-center">
         <ul>
             <h2><strong>{{ tag.name }}</strong></h2>
             {% for article in tag.articles %}
                 <a href="{{ path('article_show',{'id': article.id}) }}"><h4>{{ article.title }}</h4></a>
             {% endfor %}
         </ul>
-        <a href="{{ path('tag_index') }}">
-            Back to Tags.
-        </a>
+        <a class="btn btn-success" href="{{ path('tag_index') }}" role="button">Back to Tag</a>
     </div>
 {% endblock %}

@@ -1,6 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 
-
+@mixin title
+{
+    text-align: center;
+    color: red;
+}
 
 body
 {
@@ -9,13 +13,21 @@ body
 }
 h1
 {
-    text-align: center;
+    @include title;
 }
 .container
 {
-    margin-top: 5vw;
+    margin-top: 3vw;
 }
-.form
+.button
 {
-    margin-bottom: 2vw;
+    margin-top: 2vw;
+}
+.buttonHome
+{
+    padding:5vw;
+}
+p
+{
+    text-align: justify;
 }

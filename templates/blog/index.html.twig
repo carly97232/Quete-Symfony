@@ -7,11 +7,10 @@
 
 
 {% block body %}
-
     <h1>Blog</h1>
-    <div class="container">
-        <div class="row">
-            <div class="form col-8">
+
+    <div class="container text-center">
+        <div class="form col-8">
             {{ form_start(form) }}
             {{ form_row(form.title) }}
             {{ form_row(form.content) }}
@@ -20,16 +19,16 @@
                 <button class="btn">{{ button_label|default('Save') }}</button>
             </div>
             {{ form_end(form) }}
-            </div>
+        </div>
         {% for article in articles %}
             <div>
-                <a href="{{ path('article_show',{'id': article.title}) }}"><h2>{{ article.title }}</h2></a><h3>{{ article.category.name }}</h3>
+                <h2><a href="{{ path('article_show',{'id': article.id}) }}">{{ article.title }}</a>
+                    : {{ article.category.name }}</h2>
                 <p>{{ article.content }}</p>
             </div>
+
         {% endfor %}
-        </div>
-        <a href="{{ path('homepage') }}">
-            Back to homepage.
-        </a>
+        <a class="btn btn-success" href="#" role="button">Back</a>
+
     </div>
 {% endblock %}

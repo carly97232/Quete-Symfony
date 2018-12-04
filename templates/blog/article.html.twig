@@ -2,19 +2,19 @@
 
 
 {% block body %}
-
     <h1>Articles</h1>
 
-    {% for article in articles %}
-        <div>
-            <a href="{{ path('article_show',{'id': article.id}) }}"><h2>{{ article.title }}</h2></a>
+    <div class="container text-center">
+        <ul>
+            {% for article in articles %}
+                <div>
+                    <a href="{{ path('article_show',{'id': article.id}) }}"><h2>{{ article.title }}</h2></a>
+                </div>
+            {% endfor %}
+        </ul>
+        <div class="button text-center">
+            <a class="btn btn-success" href="{{ path('blog_index') }}" role="button">Back to Blog</a>
+            <a class="btn btn-success" href="{{ path('blog_category_index') }}" role="button">Back to Category</a>
         </div>
-    {% endfor %}
-    <a href="{{ path('blog_category_index') }}">
-        Back to Category.
-    </a><br/>
-    <a href="{{ path('blog_index') }}">
-        Back to Blog.
-    </a>
-
+    </div>
 {% endblock %}

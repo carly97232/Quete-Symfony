@@ -3,15 +3,13 @@
 {% block title %}Tags{% endblock %}
 
 {% block body %}
-
     <h1>Tags</h1>
-    <div class="container example-wrapper">
-        <div class="row">
-            <ul>
-                {% for tag in tags %}
-                    <a href="{{ path('tag_show',{'name': tag.name}) }}"><h2>{{ tag.name }}</h2></a>
-                {% endfor %}
-            </ul>
-        </div>
+
+    <div class="container text-center">
+        <ul>
+            {% for tag in tags %}
+                <a href="{{ path('tag_show',{'name': tag.name}) }}"><h2>{{ tag.name }}</h2></a>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
