@@ -23,7 +23,7 @@
             </div>
         {% for article in articles %}
             <div>
-                <a href="{{ path('article_show',{'id': article.id}) }}"><h2>{{ article.title }}</h2></a><h3>{{ article.category.name }}</h3>
+                <a href="{{ path('article_show',{'id': article.title}) }}"><h2>{{ article.title }}</h2></a><h3>{{ article.category.name }}</h3>
                 <p>{{ article.content }}</p>
             </div>
         {% endfor %}

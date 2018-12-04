@@ -10,12 +10,6 @@
             <ul>
                 {% for tag in tags %}
                     <a href="{{ path('tag_show',{'name': tag.name}) }}"><h2>{{ tag.name }}</h2></a>
-                    <ul>
-                        {% for article in tag.articles %}
-                            <h3>{{ article.title }}</h3><br/>
-                            <p>{{ article.content }}</p>
-                        {% endfor %}
-                    </ul>
                 {% endfor %}
             </ul>
         </div>

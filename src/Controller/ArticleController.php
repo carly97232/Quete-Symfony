@@ -21,11 +21,13 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{id}", name="article_show")
      * @param Article $article
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function show(Article $article) :Response
+    public function show(Article $article) : Response
     {
-        return $this->render('article.html.twig', ['article'=>$article]);
+        return $this->render('article.html.twig', [
+            'article' => $article,
+        ]);
     }
 
     /**

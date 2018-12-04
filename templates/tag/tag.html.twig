@@ -8,11 +8,7 @@
         <ul>
             <h2><strong>{{ tag.name }}</strong></h2>
             {% for article in tag.articles %}
-                <ul>
-                    <li>
-                      {{ article.title }}
-                    </li>
-                </ul>
+                <a href="{{ path('article_show',{'id': article.id}) }}"><h4>{{ article.title }}</h4></a>
             {% endfor %}
         </ul>
         <a href="{{ path('tag_index') }}">
