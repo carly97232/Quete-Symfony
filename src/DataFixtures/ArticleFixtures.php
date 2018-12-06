@@ -29,9 +29,8 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         foreach ($categories as $category) {
             for ($i = 1; $i <= 10; $i++) {
                 $article = new Article();
-                $content = '<p>' . join($faker->paragraphs(2), '</p><p>') . '</p>';
                 $article->setTitle(mb_strtolower($faker->sentence()));
-                $article->setContent($content);
+                $article->setContent($faker->paragraph);
                 $manager->persist($article);
                 $article->setCategory($category);
                 $manager->flush();
